@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "ReadMe.html",
+    "href": "ReadMe.html",
+    "title": "Repository for Image Analysis Annotation",
+    "section": "",
+    "text": "Repository for Image Analysis Annotation\nThis repository is designed for the management, organization, and utilization of images for annotation processes in image analysis projects. The following guidelines must be observed:\n\nAll images must be placed in the library folder.\n\nThe script code contains the instructions for moving images in blocks.\n\nIt is necessary to ensure that images are not duplicated and are properly rotated before use.\nThe website associated with this repository will display only the content defined in the index.qmd file.\n\nThe website must be built using the command:\nquarto render website\n\nThe library folder will be hosted on the website, and each image will be assigned a unique URL.\nImage URLs can be extracted using the code provided in code.qmd.\nThe generated links should be employed as references for annotations in Label Studio."
+  },
+  {
+    "objectID": "code.html",
+    "href": "code.html",
+    "title": "code",
+    "section": "",
+    "text": "Image modification\n\nlibrary(tidyverse)\nlibrary(magick)\n\nimgdir &lt;- choose.dir() \nnewdir &lt;- choose.dir() \n\nimgfiles &lt;- list.files(path = imgdir\n                       , full.names = T\n                       , recursive = T\n                       )\n\nmovefiles &lt;- imgfiles %&gt;% \n  enframe(name = \"num\", value = \"path\") %&gt;% \n  mutate(imgname = gsub('.*GERM/(.+)', '\\\\1', path)) %&gt;% \n  mutate(across(imgname, ~gsub('/', '_', .))) %&gt;% \n  mutate(across(imgname, ~gsub('[[:space:]]', '-', .))) %&gt;% \n  mutate(across(imgname, ~gsub('\\\\(|\\\\)', '_', .))) %&gt;% \n  mutate(across(imgname, ~gsub('__', '_', .))) %&gt;% \n  mutate(newdir = file.path({{newdir}}, imgname)) %&gt;% \n  filter(str_detect(imgname, \"DIA-(3|4)\")) %&gt;% \n  filter(!str_detect(imgname, \"mp4\"))\n\nnrow(movefiles)\n\nwalk(movefiles, \\(x) {\n  \n  file.copy(from = movefiles$path, to = movefiles$newdir\n            , overwrite = T)\n})\n\n\n\nImage URL for Label Studio\n\nnewdir &lt;- \"library/maiz/\"\n\nimgs &lt;- list.files(path = newdir\n                   , pattern = \"jpg\"\n                   , full.names = T\n                   ) %&gt;% \n  enframe() %&gt;% \n  mutate(url = file.path(\"https://flavjack.github.io/pheno-germination\", value))\n\nimgs %&gt;% \n  select(url) %&gt;% \n  write_csv(file.path(newdir, \"images4labelstudio.txt\"), col_names = F)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PhenoCrops Project",
+    "section": "",
+    "text": "Website for crop phenotyping.\nTools required for image analysis"
+  },
+  {
+    "objectID": "index.html#resources",
+    "href": "index.html#resources",
+    "title": "PhenoCrops Project",
+    "section": "Resources",
+    "text": "Resources\nGit: Version control system\nAnaconda: Anaconda\nLabel Studio: Label Studio\nLabels design: Huito package\nPhenoboard: Phenotyping board\nscale: Phenotyping board"
+  }
+]
