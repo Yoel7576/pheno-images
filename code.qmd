@@ -45,14 +45,14 @@ walk(movefiles, \(x) {
 # Image URL for Label Studio
 
 ```{r}
-newdir <- "library/maiz/"
+newdir <- "library"
 
 imgs <- list.files(path = newdir
-                   , pattern = "jpg"
+                   , pattern = "jpg|JPG"
                    , full.names = T
                    ) %>% 
   enframe() %>% 
-  mutate(url = file.path("https://flavjack.github.io/pheno-germination", value))
+  mutate(url = file.path("https://yoel7576.github.io/pheno-images/", value))
 
 imgs %>% 
   select(url) %>% 
