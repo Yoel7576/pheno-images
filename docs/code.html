@@ -212,14 +212,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="image-url-for-label-studio" class="level1">
 <h1>Image URL for Label Studio</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>newdir <span class="ot">&lt;-</span> <span class="st">"library/maiz/"</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>newdir <span class="ot">&lt;-</span> <span class="st">"library"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>imgs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> newdir</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                   , <span class="at">pattern =</span> <span class="st">"jpg"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                   , <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"jpg|JPG"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                   , <span class="at">full.names =</span> T</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                   ) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">enframe</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">url =</span> <span class="fu">file.path</span>(<span class="st">"https://flavjack.github.io/pheno-germination"</span>, value))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">url =</span> <span class="fu">file.path</span>(<span class="st">"https://yoel7576.github.io/pheno-images/"</span>, value))</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>imgs <span class="sc">%&gt;%</span> </span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(url) <span class="sc">%&gt;%</span> </span>

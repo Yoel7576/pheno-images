@@ -48,7 +48,7 @@ walk(movefiles, \(x) {
 newdir <- "library"
 
 imgs <- list.files(path = newdir
-                   , pattern = "jpg|JPG"
+                   , pattern = c("jpg|JPG")
                    , full.names = T
                    ) %>% 
   enframe() %>% 
@@ -57,4 +57,5 @@ imgs <- list.files(path = newdir
 imgs %>% 
   select(url) %>% 
   write_csv(file.path(newdir, "images4labelstudio.txt"), col_names = F)
+
 ```
